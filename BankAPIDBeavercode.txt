@@ -28,7 +28,7 @@ INSERT INTO Client (name) VALUES ("Killua Zoldyck")
 INSERT INTO Client (name) VALUES ("Yuji Itadori")
 
 INSERT INTO Account (balance, clientID, name) VALUES (123454,1, "Light Yagami")
-INSERT INTO Account (balance, clientID, name) VALUES (256,2, "Vash Stampede")
+INSERT INTO Account (balance, clientID, name) VALUES (300,2, "Vash Stampede")
 INSERT INTO Account (balance, clientID, name) VALUES (174824,3, "Killua Zoldyck")
 INSERT INTO Account (balance, clientID, name) VALUES (734,4, "Yuji Itadori")
 
@@ -39,6 +39,15 @@ SELECT * FROM Account WHERE accountID = 3
 UPDATE Client SET name = "Steve Madden" WHERE clientID = 2 
 
 UPDATE Account SET name = "Ajax" WHERE accountID = 3
+
+SELECT * FROM Account WHERE clientID = 2 AND balance > 100
+SELECT * FROM Account WHERE clientID = 2 AND balance < 500000
+SELECT * FROM Account WHERE clientID = 2 AND balance > 100 AND balance <500000
+
+UPDATE Account SET balance = balance + 20000 WHERE accountID = 3
+UPDATE Account SET balance = balance - 60000 WHERE accountID = 3
+
+UPDATE Account SET balance = 39999 WHERE accountID = 3
 
 DELETE FROM Account WHERE accountID = 3
 

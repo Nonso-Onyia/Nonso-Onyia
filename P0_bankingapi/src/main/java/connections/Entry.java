@@ -18,16 +18,21 @@ public class Entry{
         		.start(7000);
 		
 		app.get("/Client", ClientController::getAllClients);
+		app.post("/Client/:name", ClientController::insertClient);
 		app.get("/Client/:id", ClientController::getClientByID);
-		
-        app.post("/Client/:name", ClientController::insertClient);
-		
+		app.put("/Client/:id/:name", ClientController::updateClient);
 		app.delete("/Client/:id", ClientController::deleteClient);
+		
+		/* app.post("/client/:clientID/accounts/:accountID",
+				AccountController::insertAccountByID);
+				*/
 		
 		app.get("/client/:clientID/accounts", 
 				AccountController::getAllClientAccounts);
-		app.get("/client/:clientID/accounts/:accountID", 
+		
+		app.post("/client/:clientID/accounts/:accountID", 
 				AccountController::getClientAccountByID);
+		
 		app.get("/client/:clientID/accounts/"
 				+ "?amountLessThan=:amount", 
 				AccountController::getClientAccountLessThan);

@@ -13,12 +13,6 @@ import models.Client;
 
 public class CDimp implements ClientDAO {
 	
-	/*
-	 * If I decide to revisit this project, I would probably make a base
-	 * get method in a seperate class in the services package to avoid
-	 * repetition
-	 */
-	
 	Connection connection;
 	
 	public CDimp(Connection conn) {
@@ -125,10 +119,22 @@ public class CDimp implements ClientDAO {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public void updateClient(String name) {
-		// TODO Auto-generated method stub
+	
+    @Override
+	public void updateClient(int id, String name) {
+		String sql = "Update Client " 
+				    + "SET name = ?"
+				    + "WHERE clientID = ?";
+		try {
+			PreparedStatement prepStatement = connection.prepareStatement(sql);
+            prepStatement.setString(1, name);
+            prepStatement.setInt(2,id);
+            prepStatement.execute();
+		}
+		
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

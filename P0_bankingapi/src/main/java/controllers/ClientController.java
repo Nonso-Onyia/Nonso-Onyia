@@ -16,6 +16,7 @@ public class ClientController {
 		app.get("/client/:id", ClientController::getClientByID);
 		
         app.post("/client/:name", ClientController::insertClient);
+        app.put("/clients/:id", ClientController::updateClient);
 		
 		app.delete("/client/:id", ClientController::deleteClient);
 	}
@@ -31,7 +32,6 @@ public class ClientController {
 			ctx.status(400);
 			ctx.result("No such client found.");
 		}
-		
 		ctx.json(dao.getClienttByID(id));
 	}
 	
@@ -54,5 +54,17 @@ public class ClientController {
 		}
 		dao.deleteClient(id);
 	}
+	public static void updateClient(Context ctx) {
+		CDimp dao = new CDimp(ConnectionUtil.getConnection());
+		Integer id = Integer.parseInt(ctx.pathParam("id"));
+		String name = ctx.pathParam("name");
+		if (!Validator.ifClientExists(dao, id)) {
+			ctx.status(400);
+			ctx.result("No such client found.");
+		}
+		else {
+			dao.updateClient(id, name);
+		}
 
+}
 }

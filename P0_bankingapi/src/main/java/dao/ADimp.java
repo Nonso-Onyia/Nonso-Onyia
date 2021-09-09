@@ -19,7 +19,7 @@ public class ADimp implements Accountdao {
 	@Override
 	public List<Account> getAllClientAccounts(int clientID) {
 		List<Account> accountList = new ArrayList<Account>();
-		String sql = "SELECT * FROM accounts"
+		String sql = "SELECT * FROM Account"
 				+ "WHERE ClientID = ?";
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -28,11 +28,11 @@ public class ADimp implements Accountdao {
 			
             while(resultSet.next()) {
             	int accountID = resultSet.getInt("accountID");
-            	int clientID2 = resultSet.getInt("clientID");
+            	int clientID1 = resultSet.getInt("clientID");
             	int balance = resultSet.getInt("balance");
             	String name = resultSet.getString("name");
             	
-            	Account account = new Account(accountID, clientID2, balance, name);
+            	Account account = new Account(accountID, clientID1, balance, name);
             	accountList.add(account);
             }
 		}
@@ -44,7 +44,7 @@ public class ADimp implements Accountdao {
 	@Override
 	public Account getClientAccountByID(int clientID, int accountID) {
 		Account resultAccount = null;
-		String sql = "SELECT * FROM accounts "
+		String sql = "SELECT * FROM Account "
 				+ "WHERE ClientID = ?"
 				+ "AND AccountID = ?";
 		try {
@@ -72,7 +72,7 @@ public class ADimp implements Accountdao {
 	@Override
 	public List<Account> getClientAccountsByMinAmt(int clientID, float amount){
 		List<Account> accountList = new ArrayList<Account>();
-		String sql = "SELECT * FROM accounts "
+		String sql = "SELECT * FROM Account "
 				+ "WHERE ClientID = ? AND Balance > ?";
 		
 		try {
@@ -99,7 +99,7 @@ public class ADimp implements Accountdao {
 	@Override
 	public List<Account> getClientAccountsByMaxAmt(int clientID, float amount){
 		List<Account> accountList = new ArrayList<Account>();
-		String sql = "SELECT * FROM accounts "
+		String sql = "SELECT * FROM Account "
 				+ "WHERE ClientID = ? AND Balance < ?";
 		
 		try {
@@ -126,7 +126,7 @@ public class ADimp implements Accountdao {
 	@Override
 	public List<Account> getClientAccountsByRange(int clientID, float minAmount, float maxAmount){
 		List<Account> accountList = new ArrayList<Account>();
-		String sql = "SELECT * FROM accounts "
+		String sql = "SELECT * FROM Account "
 				+ "WHERE ClientID = ? AND Balance > ? AND Balance < ?";
 		
 		try {
@@ -153,7 +153,7 @@ public class ADimp implements Accountdao {
 	}
 	@Override
 	public void createAccount(int clientID, float balance) {
-		String sql = "INSERT INTO accounts (ClientID, Balance)"
+		String sql = "INSERT INTO Account (ClientID, Balance)"
 				+ "VALUES (?, ?)";
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -168,7 +168,7 @@ public class ADimp implements Accountdao {
 	}
 	@Override
 	public void deleteAccount(int accountID) {
-		String sql = "DELETE FROM accounts "
+		String sql = "DELETE FROM Account "
 				+ "WHERE AccountID = ?";
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -181,7 +181,7 @@ public class ADimp implements Accountdao {
 	}
 	@Override
 	public void deposit(int accountID, float balance) {
-		String sql = "UPDATE accounts "
+		String sql = "UPDATE Account "
 				+ "SET Balance = Balance + ?"
 				+ "WHERE AccountID = ?";
 		try {
@@ -196,7 +196,7 @@ public class ADimp implements Accountdao {
 	}
 	@Override
 	public void withdraw(int accountID, float balance) {
-		String sql = "UPDATE accounts "
+		String sql = "UPDATE Account "
 				+ "SET Balance = ?"
 				+ "WHERE AccountID = ?";
 		try {
