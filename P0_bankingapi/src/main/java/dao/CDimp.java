@@ -28,7 +28,7 @@ public class CDimp implements ClientDAO {
 	@Override
 	public List<Client> getAllClients() {
 		List<Client> clientList = new ArrayList<Client>();
-		String sql = "SELECT * FROM clients";
+		String sql = "SELECT * FROM Client";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
@@ -51,7 +51,7 @@ public class CDimp implements ClientDAO {
 	@Override
 	public Client getClienttByID(int id) {
 		Client resultClient = null;
-		String sql = "SELECT * FROM clients "
+		String sql = "SELECT * FROM Client "
 				+ "WHERE ClientID = ?";
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -75,8 +75,8 @@ public class CDimp implements ClientDAO {
 	@Override
 	public Client getClientByName(String name) {
 		Client resultClient = null;
-		String sql = "SELECT * FROM clients "
-				+ "WHERE Name = ?";
+		String sql = "SELECT * FROM Client "
+				+ "WHERE name = ?";
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
 			prepStatement.setString(1, name);
@@ -98,7 +98,7 @@ public class CDimp implements ClientDAO {
 
 	@Override
 	public void createClient(String name) {
-		String sql = "INSERT INTO clients (Name)"
+		String sql = "INSERT INTO Client (Name)"
 				+ "VALUES (?)";
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class CDimp implements ClientDAO {
 
 	@Override
 	public void deleteClient(int id) {
-		String sql = "DELETE FROM clients "
+		String sql = "DELETE FROM Client "
 				+ "WHERE ClientID = ?";
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -124,6 +124,12 @@ public class CDimp implements ClientDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void updateClient(String name) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

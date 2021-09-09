@@ -16,29 +16,42 @@ public class Entry{
 		
 		Javalin app = Javalin.create()
         		.start(7000);
-        Connection connection = ConnectionUtil.getConnection();
-        ClientController.init(app);
-        AccountController.init(app);
-		Connection connections = ConnectionUtil.getConnection();
 		
-		String sqlStatement = "SELECT * FROM Clients";
-		try {
-			PreparedStatement statement = connections.prepareStatement(sqlStatement);
-			
-			ResultSet resultSet = statement.executeQuery("select * from p0database-2.Client");
-			
-            System.out.println("================ test_table =================");
-            while(resultSet.next()) {
-                System.out.println("name: ["
-                        + resultSet.getString("name")
-                        + "]   clientID: ["
-                        + resultSet.getInt("clientID")
-                        + "]");
-            }
-            System.out.println("=============== /test_table =================");
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		app.get("/Client", ClientController::getAllClients);
+		app.get("/Client/:id", ClientController::getClientByID);
+		
+        app.post("/Client/:name", ClientController::insertClient);
+		
+		app.delete("/Client/:id", ClientController::deleteClient);
+		
+		app.get("/client/:clientID/accounts", 
+				AccountController::getAllClientAccounts);
+		app.get("/client/:clientID/accounts/:accountID", 
+				AccountController::getClientAccountByID);
+		app.get("/client/:clientID/accounts/"
+				+ "?amountLessThan=:amount", 
+				AccountController::getClientAccountLessThan);
+		app.get("/client/:clientID/accounts/"
+				+ "?amountGreaterThan=:amount", 
+				AccountController::getClientAccountGreaterThan);
+		app.get("/client/:clientID/accounts/"
+				+ "?amountLessThan=:maxamount"
+				+ "&amountGreaterThan=:minamount", 
+				AccountController::getClientAccountRange);
+		app.patch("/client/:clientID/accounts/:accountID", 
+				AccountController::depositOrWithdraw);
+		
+		app.patch("/clientF/:clientFrom/clientT/:clientTo"
+				+ "accounts/:accountFrom"
+				+ "/transfer/:accountTo", 
+				AccountController::transferAccount);
+		
+		app.post("/client/:clientID/accounts/:balance", 
+				AccountController::insertAccount);
+		
+		app.put("/client/:clientID/accounts/:accountID",
+				AccountController::updateAccount);
+		app.delete("/client/:clientID/accounts/:accountID", 
+				AccountController::deleteAccount);
 	}
 }

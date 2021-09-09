@@ -30,8 +30,9 @@ public class ADimp implements Accountdao {
             	int accountID = resultSet.getInt("accountID");
             	int clientID2 = resultSet.getInt("clientID");
             	int balance = resultSet.getInt("balance");
+            	String name = resultSet.getString("name");
             	
-            	Account account = new Account(accountID, clientID2, balance);
+            	Account account = new Account(accountID, clientID2, balance, name);
             	accountList.add(account);
             }
 		}
@@ -56,8 +57,9 @@ public class ADimp implements Accountdao {
             	int accountID2 = resultSet.getInt("accountID");
             	int clientID2 = resultSet.getInt("clientID");
             	int balance = resultSet.getInt("balance");
+            	String name = resultSet.getString("name");
             	
-            	resultAccount = new Account(accountID2, clientID2, balance);
+            	resultAccount = new Account(accountID2, clientID2, balance, name);
             }
             
 		}
@@ -83,8 +85,9 @@ public class ADimp implements Accountdao {
             	int accountID = resultSet.getInt("accountID");
             	int clientID2 = resultSet.getInt("clientID");
             	int balance = resultSet.getInt("balance");
+            	String name = resultSet.getString("name");
             	
-            	Account account = new Account(accountID, clientID2, balance);
+            	Account account = new Account(accountID, clientID2, balance, name);
             	accountList.add(account);
             }
 		}
@@ -109,8 +112,9 @@ public class ADimp implements Accountdao {
             	int accountID = resultSet.getInt("accountID");
             	int clientID2 = resultSet.getInt("clientID");
             	int balance = resultSet.getInt("balance");
+            	String name = resultSet.getString("name");
             	
-            	Account account = new Account(accountID, clientID2, balance);
+            	Account account = new Account(accountID, clientID2, balance, name);
             	accountList.add(account);
             }
 		}
@@ -136,8 +140,9 @@ public class ADimp implements Accountdao {
             	int accountID = resultSet.getInt("accountID");
             	int clientID2 = resultSet.getInt("clientID");
             	int balance = resultSet.getInt("balance");
+            	String name = resultSet.getString("name");
             	
-            	Account account = new Account(accountID, clientID2, balance);
+            	Account account = new Account(accountID, clientID2, balance, name);
             	accountList.add(account);
             }
 		}

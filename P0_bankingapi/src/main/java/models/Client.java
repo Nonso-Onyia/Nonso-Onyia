@@ -1,9 +1,8 @@
 package models;
 
-import java.text.Normalizer.Form;
 import java.util.Objects;
 
-public class Client<From> {
+public class Client {
 	private String name;
 	private int clientID;
 	

@@ -1,0 +1,45 @@
+CREATE TABLE Account (
+	accountID INT auto_increment,
+	balance Double(10,2),
+	clientID INT,
+	name VARCHAR(100),
+	CONSTRAINT Account_PK PRIMARY KEY (accountID),
+	CONSTRAINT Client_FK FOREIGN KEY (clientID) REFERENCES Client (clientID)
+);
+
+  CREATE TABLE Client (
+    clientID INT auto_increment, 
+	name VARCHAR(100),
+	CONSTRAINT Client_PK PRIMARY KEY (clientID)
+	
+	);
+
+DROP TABLE Client
+
+DROP TABLE Account 
+
+SELECT * FROM Client
+
+SELECT * FROM Account
+
+INSERT INTO Client (name) VALUES ("Light Yagami")
+INSERT INTO Client (name) VALUES ("Vash Stampede")
+INSERT INTO Client (name) VALUES ("Killua Zoldyck")
+INSERT INTO Client (name) VALUES ("Yuji Itadori")
+
+INSERT INTO Account (balance, clientID, name) VALUES (123454,1, "Light Yagami")
+INSERT INTO Account (balance, clientID, name) VALUES (256,2, "Vash Stampede")
+INSERT INTO Account (balance, clientID, name) VALUES (174824,3, "Killua Zoldyck")
+INSERT INTO Account (balance, clientID, name) VALUES (734,4, "Yuji Itadori")
+
+SELECT * FROM Client WHERE clientID = 2
+
+SELECT * FROM Account WHERE accountID = 3
+
+UPDATE Client SET name = "Steve Madden" WHERE clientID = 2 
+
+UPDATE Account SET name = "Ajax" WHERE accountID = 3
+
+DELETE FROM Account WHERE accountID = 3
+
+DELETE FROM Client WHERE clientID = 5

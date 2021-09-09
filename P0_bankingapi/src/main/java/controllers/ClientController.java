@@ -2,9 +2,6 @@ package controllers;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
-import models.Client;
-import models.Account;
-import dao.ADimp;
 import dao.CDimp;
 import connections.ConnectionUtil;
 import services.Validator;
@@ -29,7 +26,7 @@ public class ClientController {
 	}
 	public static void getClientByID(Context ctx) {
 		CDimp dao = new CDimp(ConnectionUtil.getConnection());
-		Integer id = Integer.parseInt(ctx.pathParam("id"));
+		Integer id = Integer.parseInt(ctx.pathParam(":id"));
 		if (!Validator.ifClientExists(dao, id)) {
 			ctx.status(400);
 			ctx.result("No such client found.");
@@ -40,13 +37,17 @@ public class ClientController {
 	
 	public static void insertClient(Context ctx) {
 		CDimp dao = new CDimp(ConnectionUtil.getConnection());
-		String name = ctx.pathParam("name");
+		String name = ctx.pathParam(":name");
 		dao.createClient(name);
+		dao.getClientByName(name);
 		ctx.status(201);
+		/*ctx.result("No such client found.");
+		 * 
+		 */
 	}
 	public static void deleteClient(Context ctx) {
 		CDimp dao = new CDimp(ConnectionUtil.getConnection());
-		Integer id = Integer.parseInt(ctx.pathParam("id"));
+		Integer id = Integer.parseInt(ctx.pathParam(":id"));
 		if (!Validator.ifClientExists(dao, id)) {
 			ctx.status(400);
 			ctx.result("No such client found.");

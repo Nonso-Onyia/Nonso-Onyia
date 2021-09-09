@@ -6,16 +6,18 @@ public class Account {
 	private int accountID;
 	private int clientID;
 	private float balance;
+	private String name;
 	
 	public Account() {
 		super();
 	}
 	
-	public Account(int accountID, int clientID, float balance) {
+	public Account(int accountID, int clientID, float balance, String name) {
 		super();
 		this.accountID = accountID;
 		this.clientID = clientID;
 		this.balance = balance;
+		this.name = name;
 	}
 	public int getAccountID() {
 		return accountID;
@@ -35,10 +37,17 @@ public class Account {
 	public void setBalance(float balance) {
 		this.balance = balance;
 	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(accountID, balance, clientID);
+		return Objects.hash(accountID, balance, clientID, name);
 	}
 
 	@Override
