@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,23 +17,22 @@ public class ADimp implements Accountdao {
 	public ADimp(Connection conn) {
 		connection = conn;
 	}
-	@Override
-	public List<Account> getAllClientAccounts(int clientID) {
+	
+	public List<Account> getAllClientAccounts() {
 		List<Account> accountList = new ArrayList<Account>();
-		String sql = "SELECT * FROM Account"
-				+ "WHERE ClientID = ?";
+		String sql = "SELECT * FROM Account";
+				
 		try {
-			PreparedStatement prepStatement = connection.prepareStatement(sql);
-			prepStatement.setInt(1, clientID);
-			ResultSet resultSet = prepStatement.executeQuery();
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(sql);
 			
             while(resultSet.next()) {
             	int accountID = resultSet.getInt("accountID");
-            	int clientID1 = resultSet.getInt("clientID");
+            	int clientID = resultSet.getInt("clientID");
             	int balance = resultSet.getInt("balance");
             	String name = resultSet.getString("name");
             	
-            	Account account = new Account(accountID, clientID1, balance, name);
+            	Account account = new Account(accountID, clientID, balance, name);
             	accountList.add(account);
             }
 		}
@@ -73,7 +73,8 @@ public class ADimp implements Accountdao {
 	public List<Account> getClientAccountsByMinAmt(int clientID, float amount){
 		List<Account> accountList = new ArrayList<Account>();
 		String sql = "SELECT * FROM Account "
-				+ "WHERE ClientID = ? AND Balance > ?";
+				+ "WHERE ClientID = ?" 
+				+ "AND Balance > ?";
 		
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -100,7 +101,8 @@ public class ADimp implements Accountdao {
 	public List<Account> getClientAccountsByMaxAmt(int clientID, float amount){
 		List<Account> accountList = new ArrayList<Account>();
 		String sql = "SELECT * FROM Account "
-				+ "WHERE ClientID = ? AND Balance < ?";
+				+ "WHERE ClientID =? "
+				+ "AND Balance < ";
 		
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -127,7 +129,9 @@ public class ADimp implements Accountdao {
 	public List<Account> getClientAccountsByRange(int clientID, float minAmount, float maxAmount){
 		List<Account> accountList = new ArrayList<Account>();
 		String sql = "SELECT * FROM Account "
-				+ "WHERE ClientID = ? AND Balance > ? AND Balance < ?";
+				+ "WHERE ClientID = ?" 
+				+ "AND Balance > ? "
+				+ "AND Balance < ?";
 		
 		try {
 			PreparedStatement prepStatement = connection.prepareStatement(sql);
@@ -214,6 +218,13 @@ public class ADimp implements Accountdao {
 	public void update(int accountID, float amount) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+
+	@Override
+	public List<Account> getAllClientAccounts(int clientID, int accountID, String name, float balance) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

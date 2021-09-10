@@ -23,7 +23,7 @@ public class Entry{
 		app.put("/Client/:id/:name", ClientController::updateClient);
 		app.delete("/Client/:id", ClientController::deleteClient);
 		
-		/* app.post("/client/:clientID/accounts/:accountID",
+		/* app.post("/client/:clientID/accounts/:accountID"),
 				AccountController::insertAccountByID);
 				*/
 		
@@ -37,7 +37,7 @@ public class Entry{
 				+ "?amountLessThan=:amount", 
 				AccountController::getClientAccountLessThan);
 		app.get("/client/:clientID/accounts/"
-				+ "?amountGreaterThan=:amount", 
+				+ "?amountGreaterThan", 
 				AccountController::getClientAccountGreaterThan);
 		app.get("/client/:clientID/accounts/"
 				+ "?amountLessThan=:maxamount"

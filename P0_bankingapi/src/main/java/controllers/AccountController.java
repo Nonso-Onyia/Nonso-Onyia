@@ -48,10 +48,11 @@ public class AccountController {
 	}
 	public static void getAllClientAccounts(Context ctx) {
 		ADimp dao = new ADimp(ConnectionUtil.getConnection());
-		int clientID = Integer.parseInt(ctx.pathParam("clientID"));
-		ctx.json(dao.getAllClientAccounts(clientID));
+		ctx.json(dao.getAllClientAccounts());
+		ctx.status(200);
 		
 	}
+	
 	public static void getClientAccountByID(Context ctx) {
 		ADimp dao = new ADimp(ConnectionUtil.getConnection());
 		int clientID = Integer.parseInt(ctx.pathParam("clientID"));
